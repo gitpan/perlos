@@ -1,0 +1,20 @@
+--- os2.c~	Sat Aug 03 20:47:28 1996
++++ os2.c	Tue Aug 06 22:33:58 1996
+@@ -648,7 +648,7 @@
+ 	newp = getenv("PERLLIB_PREFIX");
+ 	if (newp) {
+ 	    oldp = newp;
+-	    while (*newp && !isSPACE(*newp)) {
++	    while (*newp && !isSPACE(*newp) && *newp != ';') {
+ 		newp++; oldl++;		/* Skip digits. */
+ 	    }
+ 	    while (*newp && (isSPACE(*newp) || *newp == ';')) {
+@@ -675,7 +675,7 @@
+ 	die("Malformed PERLLIB_PREFIX");
+     }
+     strncpy(ret, newp, newl);
+-    strncpy(ret + newl, s + oldl, l - oldl);
++    strcpy(ret + newl, s + oldl);
+     return ret;
+ }
+ 
